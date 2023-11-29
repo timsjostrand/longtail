@@ -9,6 +9,11 @@ target_sources(longtail_platform
 		"longtail_platform.h"
 )
 
+target_include_directories(longtail_platform
+	PUBLIC
+		"./"
+)
+
 # NOTE(TS): Workaround for the following warnings that are not strict C:
 # * warning: implicit declaration of function 'ftruncate64'
 # * error: use of undeclared identifier 'off64_t'

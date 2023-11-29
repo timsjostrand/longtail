@@ -1,4 +1,5 @@
 add_library(longtail)
+add_library(longtail::longtail ALIAS longtail)
 
 target_sources(longtail
 	PRIVATE
@@ -7,6 +8,11 @@ target_sources(longtail
 		"ext/stb_ds.c"
 	PUBLIC
 		"longtail.h"
+)
+
+target_include_directories(longtail
+	PUBLIC
+		"./"
 )
 
 # NOTE(TS): Workaround for the following warnings that are not strict C:
