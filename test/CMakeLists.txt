@@ -1,3 +1,3 @@
-add_executable(test main.cpp test.cpp)
+add_executable(longtail_test main.cpp test.cpp)
 
-target_link_libraries(test PRIVATE longtail)
+target_link_libraries(longtail_test PRIVATE longtail)
