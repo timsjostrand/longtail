@@ -1066,6 +1066,9 @@ int Longtail_GetFilePermissions(const char* path, uint16_t* out_permissions)
     return 0;
 }
 
+#define LONGTAIL_WIN32_PART_SIZE(cur, end) \
+    ((end - cur) > (DWORD)(0xffffffff)) ? (DWORD)(0xffffffff) : (DWORD)(end - cur)
+
 int Longtail_Read(HLongtail_OpenFile handle, uint64_t offset, uint64_t length, void* output)
 {
     HANDLE h = (HANDLE)(handle);
@@ -1073,12 +1076,20 @@ int Longtail_Read(HLongtail_OpenFile handle, uint64_t offset, uint64_t length, v
     OVERLAPPED ReadOp;
     memset(&ReadOp, 0, sizeof(ReadOp));
 
-    ReadOp.Offset  = (DWORD)(offset & 0xffffffff);
-    ReadOp.OffsetHigh = (DWORD)(offset >> 32);
-
-    if (FALSE == ReadFile(h, output, (DWORD)length, 0, &ReadOp))
+    char* cur = (char*)output;
+    const char* end = cur + length;
+    while (cur < end)
     {
-        return Win32ErrorToErrno(GetLastError());
+        ReadOp.Offset  = (DWORD)(offset & 0xffffffff);
+        ReadOp.OffsetHigh = (DWORD)(offset >> 32);
+
+        const DWORD part_size = LONGTAIL_WIN32_PART_SIZE(cur, end);
+        if (FALSE == ReadFile(h, cur, part_size, 0, &ReadOp))
+        {
+            return Win32ErrorToErrno(GetLastError());
+        }
+        cur += part_size;
+        offset += part_size;
     }
 
     return 0;
@@ -1091,13 +1102,22 @@ int Longtail_Write(HLongtail_OpenFile handle, uint64_t offset, uint64_t length, 
     OVERLAPPED WriteOp;
     memset(&WriteOp, 0, sizeof(WriteOp));
 
-    WriteOp.Offset  = (DWORD)(offset & 0xffffffff);
-    WriteOp.OffsetHigh = (DWORD)(offset >> 32);
-
-    if (FALSE == WriteFile(h, input, (DWORD)length, 0, &WriteOp))
+    const char* cur = (const char*)input;
+    const char* end = cur + length;
+    while (cur < end)
     {
-        return Win32ErrorToErrno(GetLastError());
+        WriteOp.Offset  = (DWORD)(offset & 0xffffffff);
+        WriteOp.OffsetHigh = (DWORD)(offset >> 32);
+
+        const DWORD part_size = LONGTAIL_WIN32_PART_SIZE(cur, end);
+        if (FALSE == WriteFile(h, cur, part_size, 0, &WriteOp))
+        {
+            return Win32ErrorToErrno(GetLastError());
+        }
+        cur += part_size;
+        offset += part_size;
     }
+
     return 0;
 }
 
