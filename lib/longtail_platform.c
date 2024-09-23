@@ -2218,14 +2218,25 @@ int Longtail_GetFilePermissions(const char* path, uint16_t* out_permissions)
     return res;
 }
 
+// Write/read in 4 MB chunks (__APPLE__ in particular will throw errno 22 if part_size is too large).
+#define LONGTAIL_PART_SIZE(cur, end) \
+    ((end - cur) > 4194304) ? 4194304 : (end - cur)
+
 int Longtail_Read(HLongtail_OpenFile handle, uint64_t offset, uint64_t length, void* output)
 {
     FILE* f = (FILE*)handle;
     int fd = fileno(f);
-    ssize_t length_read = pread(fd, output, (off_t)length, (off_t)offset);
-    if (length_read == -1)
+    char* cur = (char*)output;
+    const char* end = cur + length;
+    while (cur < end)
     {
-        return errno;
+        ssize_t length_read = pread(fd, cur, LONGTAIL_PART_SIZE(cur, end), (off_t)offset);
+        if (length_read == -1)
+        {
+            return errno;
+        }
+        cur += length_read;
+        offset += length_read;
     }
     return 0;
 }
@@ -2235,10 +2246,17 @@ int Longtail_Write(HLongtail_OpenFile handle, uint64_t offset, uint64_t length, 
     FILE* f = (FILE*)handle;
 
     int fd = fileno(f);
-    ssize_t length_written = pwrite(fd, input, length, offset);
-    if (length_written == -1)
+    const char* cur = (const char*)input;
+    const char* end = cur + length;
+    while (cur < end)
     {
-        return errno;
+        ssize_t length_written = pwrite(fd, cur, LONGTAIL_PART_SIZE(cur, end), offset);
+        if (length_written == -1)
+        {
+            return errno;
+        }
+        cur += length_written;
+        offset += length_written;
     }
     return 0;
 }
