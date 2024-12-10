@@ -1,6 +1,6 @@
 #include "longtail_blake3.h"
 
-#include "ext/blake3.h"
+#include "blake3.h"
 #include <errno.h>
 
 const uint32_t LONGTAIL_BLAKE3_HASH_TYPE = (((uint32_t)'b') << 24) + (((uint32_t)'l') << 16) + (((uint32_t)'k') << 8) + ((uint32_t)'3');
