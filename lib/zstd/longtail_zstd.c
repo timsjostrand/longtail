@@ -1,8 +1,8 @@
 #include "longtail_zstd.h"
 
-#include "ext/zstd.h"
-#include "ext/zstd_errors.h"
-#include "ext/compress/clevels.h"
+#include "zstd.h"
+#include "zstd_errors.h"
+#include "compress/clevels.h"
 
 #include <errno.h>
 #include <inttypes.h>
