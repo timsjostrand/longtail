@@ -48,7 +48,7 @@ set_target_properties(longtail_static PROPERTIES
 	PDB_NAME                     longtail_static
 )
 
-install(TARGETS longtail_static
-	DESTINATION longtail_static$<IF:$<CONFIG:Release>,,_$<LOWER_CASE:$<CONFIG>>>
-	FILES       $<TARGET_PDB_FILE:longtail_static> DESTINATION longtail_static$<IF:$<CONFIG:Release>,,_$<LOWER_CASE:$<CONFIG>>>
+install(
+	TARGETS longtail_static                    DESTINATION longtail_static$<IF:$<CONFIG:Release>,,_$<LOWER_CASE:$<CONFIG>>>
+	FILES   $<TARGET_PDB_FILE:longtail_static> DESTINATION longtail_static$<IF:$<CONFIG:Release>,,_$<LOWER_CASE:$<CONFIG>>>
 )
