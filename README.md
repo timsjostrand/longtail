@@ -34,6 +34,22 @@ To build the command line tool, cd to `cmd`, call `./build.sh` for debug and `..
 
 Run the command line tool with `output/longtail_debug` for debug and `output/longtail` for release on OSX/Linux, `output\longtail_debug.exe` for debug and `output\longtail.exe` for release on Windows.
 
+# Building
+
+To build with cmake, run
+
+```
+cmake -B build
+```
+
+to generate the solution, and:
+
+```
+cmake --build build
+```
+
+To build all targets.
+
 # Dynamic and Static library
 There are targets for dynamic libaries (.so and .dll) in `shared_lib` and static libraries (.a) in `static_lib`. Call `./build.sh` for debug and `./build.sh release` for release on OSX/Linux, `.\build.bat` for debug and `.\build.bat release` for release on Windows.
 
