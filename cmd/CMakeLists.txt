@@ -8,7 +8,9 @@ target_link_libraries(cmd
 		longtail_minifb
 )
 
+#
 # COMPAT: Output to build/{win32,darwin,linux}_{x64,x32}/longtail/{debug,release}/longtail.* like the .bat build system.
+#
 set_target_properties(cmd PROPERTIES
 	ARCHIVE_OUTPUT_DIRECTORY     "${PROJECT_SOURCE_DIR}/build/$<IF:$<PLATFORM_ID:Windows>,win32,$<LOWER_CASE:$<PLATFORM_ID>>>_$<IF:$<EQUAL:8,${CMAKE_SIZEOF_VOID_P}>,x64,x32>/longtail/$<LOWER_CASE:$<CONFIG>>"
 	RUNTIME_OUTPUT_DIRECTORY     "${PROJECT_SOURCE_DIR}/build/$<IF:$<PLATFORM_ID:Windows>,win32,$<LOWER_CASE:$<PLATFORM_ID>>>_$<IF:$<EQUAL:8,${CMAKE_SIZEOF_VOID_P}>,x64,x32>/longtail/$<LOWER_CASE:$<CONFIG>>"
