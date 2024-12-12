@@ -32,7 +32,7 @@ target_link_libraries(longtail_static
 target_compile_options(
 	longtail_static
 	PRIVATE 
-		"$<$<AND:$<CXX_COMPILER_ID:MSVC>,$<CONFIG:RELEASE>>:/Zi>"
+		$<$<AND:$<CXX_COMPILER_ID:MSVC>,$<CONFIG:RELEASE>>:/Zi>
 )
 
 #
