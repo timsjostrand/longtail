@@ -13,7 +13,9 @@ target_sources(longtail
 )
 
 # NOTE(TS): Workaround for the following warnings that are not strict C:
-# * warning: implicit declaration of function 'qsort_r' is invalid in C99
-set_source_files_properties(longtail.c PROPERTIES LANGUAGE CXX)
+#
+#           * warning: implicit declaration of function 'qsort_r' is invalid in C99
+#
+#set_source_files_properties(longtail.c PROPERTIES LANGUAGE CXX)
 
 install(TARGETS longtail FILE_SET public_headers)
