@@ -5,7 +5,7 @@ cmake --version >/nul 2>&1 || (
 	exit
 )
 set OUT=".cmake"
-REM cmake --install "%OUT%" --prefix "dist\dist-win32-x64" --config Debug
+cmake --install "%OUT%" --prefix "dist\dist-win32-x64" --config Debug
 REM cmake --install "%OUT%" --prefix "dist\dist-win32-x64" --config Release
 cmake --install "%OUT%" --prefix "dist\dist-win32-x64" --config RelWithDebInfo
 pause
