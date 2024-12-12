@@ -44,7 +44,7 @@ set_target_properties(longtail_shared PROPERTIES
 	PDB_NAME                     longtail_dylib
 )
 
-install(TARGETS longtail_shared
-	DESTINATION longtail_dylib$<IF:$<CONFIG:Release>,,_$<LOWER_CASE:$<CONFIG>>>
-	FILES       $<TARGET_PDB_FILE:longtail_shared> DESTINATION longtail_dylib$<IF:$<CONFIG:Release>,,_$<LOWER_CASE:$<CONFIG>>>
+install(
+	TARGETS longtail_shared                    DESTINATION longtail_dylib$<IF:$<CONFIG:Release>,,_$<LOWER_CASE:$<CONFIG>>>
+	FILES   $<TARGET_PDB_FILE:longtail_shared> DESTINATION longtail_dylib$<IF:$<CONFIG:Release>,,_$<LOWER_CASE:$<CONFIG>>>
 )
