@@ -22,6 +22,6 @@ set_target_properties(cmd PROPERTIES
 )
 
 install(
-	TARGETS cmd DESTINATION longtail$<IF:$<CONFIG:Release>,,_$<LOWER_CASE:$<CONFIG>>>
-	FILES $<TARGET_PDB_FILE:cmd> DESTINATION longtail$<IF:$<CONFIG:Release>,,_$<LOWER_CASE:$<CONFIG>>>
+	TARGETS cmd                   DESTINATION longtail$<IF:$<CONFIG:Release>,,_$<LOWER_CASE:$<CONFIG>>>
+	FILES  $<TARGET_PDB_FILE:cmd> DESTINATION longtail$<IF:$<CONFIG:Release>,,_$<LOWER_CASE:$<CONFIG>>>
 )
