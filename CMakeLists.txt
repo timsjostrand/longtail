@@ -1,10 +1,8 @@
 cmake_minimum_required(VERSION 3.24)
 
-project(longtail VERSION 0.3.6 LANGUAGES C ASM CXX)
+project(longtail VERSION 0.3.6)
 
 option(BUILD_SHARED_LIBS "Build using shared libraries" OFF)
-
-set(WINDOWS_EXPORT_ALL_SYMBOLS ON CACHE BOOL "" FORCE)
 
 add_subdirectory(src)
 add_subdirectory(lib)
