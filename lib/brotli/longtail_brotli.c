@@ -1,8 +1,8 @@
 #include "longtail_brotli.h"
 
 #define FSE_STATIC_LINKING_ONLY
-#include "ext/include/brotli/decode.h"
-#include "ext/include/brotli/encode.h"
+#include "brotli/decode.h"
+#include "brotli/encode.h"
 
 #include <errno.h>
 #include <inttypes.h>
