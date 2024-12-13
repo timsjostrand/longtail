@@ -5,10 +5,8 @@ cmake --version >/nul 2>&1 || (
 	exit
 )
 set OUT=".cmake"
-cmake -B "%OUT%" && (
+cmake -B "%OUT%" -DBATLIKE=TRUE && (
 	cmake --build "%OUT%" --config Debug
-	cmake --build "%OUT%" --config Release
-	REM cmake --build "%OUT%" --config MinSizeRel
 	cmake --build "%OUT%" --config RelWithDebInfo
 )
 pause
