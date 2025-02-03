@@ -1,6 +1,8 @@
 add_library(longtail_blake3 OBJECT)
 
-add_subdirectory(ext/c EXCLUDE_FROM_ALL)
+if(NOT TARGET blake3)
+	add_subdirectory(ext/c EXCLUDE_FROM_ALL)
+endif()
 
 target_sources(longtail_blake3
 	PRIVATE
