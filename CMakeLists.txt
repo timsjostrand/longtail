@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.24)
 
-project(longtail VERSION 0.3.6)
+project(longtail LANGUAGES C ASM CXX)
 
 option(BUILD_SHARED_LIBS "Build using shared libraries" OFF)
 
