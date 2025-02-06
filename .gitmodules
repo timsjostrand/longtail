@@ -1,9 +1,12 @@
 [submodule "lib/brotli/ext"]
 	path = lib/brotli/ext
 	url = https://github.com/google/brotli
+	shallow = true
 [submodule "lib/blake3/BLAKE3"]
 	path = lib/blake3/ext
 	url = https://github.com/BLAKE3-team/BLAKE3
+	shallow = true
 [submodule "lib/zstd/ext"]
 	path = lib/zstd/ext
 	url = https://github.com/facebook/zstd.git
+	shallow = true
