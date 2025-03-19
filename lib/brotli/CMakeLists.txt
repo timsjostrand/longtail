@@ -1,6 +1,8 @@
 add_library(longtail_brotli OBJECT)
 
 add_subdirectory(ext EXCLUDE_FROM_ALL)
+set_property(TARGET brotlienc PROPERTY COMPILE_OPTIONS -w $<$<CXX_COMPILER_ID:MSVC>:/wd4334>)
+set_property(TARGET brotlidec PROPERTY COMPILE_OPTIONS -w $<$<CXX_COMPILER_ID:MSVC>:/wd4334>)
 
 target_sources(longtail_brotli
 	PRIVATE
